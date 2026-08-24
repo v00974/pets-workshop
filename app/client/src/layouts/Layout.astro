@@ -1,46 +1,122 @@
 ---
-import Header from "../components/Header.astro"
+import Header from '../components/Header.astro';
 
 interface Props {
   title?: string;
 }
 
-const { title = "Tailspin Shelter" } = Astro.props;
+const { title = 'GoldPulse AI | Paper Trading' } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width" />
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-        <meta name="generator" content={Astro.generator} />
-        <title>{title}</title>
-    </head>
-    <body class="min-h-screen bg-slate-900 text-white m-0 w-full h-full font-sans">
-        <Header />
-        <main class="container mx-auto py-6 h-full max-w-7xl">
-            <div class="px-4 sm:px-6 lg:px-8">
-                <slot />
-            </div>
-        </main>
-    </body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta
+      name="description"
+      content="GoldPulse AI is a transparent XAU/USD paper-trading workspace for analysis and learning."
+    />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <div class="ambient-orb ambient-orb-one" aria-hidden="true"></div>
+    <div class="ambient-orb ambient-orb-two" aria-hidden="true"></div>
+    <Header />
+    <main class="app-shell">
+      <slot />
+    </main>
+  </body>
 </html>
 
 <style is:global>
-    @import "tailwindcss";
+  @import "tailwindcss";
 
-    :root {
-        --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  :root {
+    color-scheme: dark;
+    font-family:
+      Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+      sans-serif;
+    background: #07110e;
+    color: #f4f6ef;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    min-width: 320px;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    min-width: 320px;
+    min-height: 100vh;
+    margin: 0;
+    overflow-x: hidden;
+    background:
+      radial-gradient(circle at 5% -8%, rgba(104, 180, 128, 0.13), transparent 28rem),
+      radial-gradient(circle at 96% 15%, rgba(224, 188, 90, 0.08), transparent 25rem),
+      linear-gradient(135deg, #07110e 0%, #0a1714 47%, #07100e 100%);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  button,
+  input {
+    font: inherit;
+  }
+
+  button {
+    cursor: pointer;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .app-shell {
+    position: relative;
+    z-index: 1;
+    width: min(1440px, calc(100% - 40px));
+    margin: 0 auto;
+    padding: 32px 0 56px;
+  }
+
+  .ambient-orb {
+    position: fixed;
+    z-index: 0;
+    border-radius: 999px;
+    pointer-events: none;
+    filter: blur(10px);
+  }
+
+  .ambient-orb-one {
+    top: 18rem;
+    left: -16rem;
+    width: 32rem;
+    height: 32rem;
+    background: rgba(48, 171, 126, 0.06);
+  }
+
+  .ambient-orb-two {
+    top: 44rem;
+    right: -17rem;
+    width: 34rem;
+    height: 34rem;
+    background: rgba(221, 183, 73, 0.045);
+  }
+
+  @media (max-width: 680px) {
+    .app-shell {
+      width: min(100% - 24px, 1440px);
+      padding-top: 20px;
+      padding-bottom: 32px;
     }
-    
-    html {
-        font-family: var(--font-sans);
-        scroll-behavior: smooth;
-    }
-    
-    body {
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-    }
+  }
 </style>
