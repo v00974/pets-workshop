@@ -1,83 +1,1643 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import DogList from '../components/DogList.astro';
-
-const API_SERVER_URL = process.env.API_SERVER_URL || 'http://localhost:5100';
-const PAGE_SIZE = 6;
-
-let dogs = [];
-let page = 1;
-let totalPages = 1;
-let error: string | null = null;
-
-const currentPage = Math.max(1, Number(Astro.url.searchParams.get('page')) || 1);
-
-try {
-  const response = await fetch(`${API_SERVER_URL}/api/dogs?page=${currentPage}&per_page=${PAGE_SIZE}`);
-  if (response.ok) {
-    const data = await response.json();
-    dogs = data.dogs;
-    page = data.page;
-    totalPages = data.total_pages;
-  } else {
-    error = `Failed to fetch data: ${response.status} ${response.statusText}`;
-  }
-} catch (err) {
-  error = `Error: ${err instanceof Error ? err.message : String(err)}`;
-}
 ---
 
-<Layout title="Tailspin Shelter - Find Your Forever Friend">
-  <div class="py-8">
-    <div class="max-w-3xl mb-10">
-      <h1 class="text-4xl font-bold mb-4 text-slate-100">Welcome to Tailspin Shelter</h1>
-      <p class="text-xl text-slate-300">Find your perfect companion from our wonderful selection of dogs looking for their forever homes.</p>
+<Layout title="GoldPulse AI | XAU/USD Paper Trading">
+  <section class="dashboard" id="overview">
+    <div class="intro-row">
+      <div>
+        <div class="eyebrow"><span></span> Gold intelligence workspace</div>
+        <h1>Trade with context,<br /><em>not conviction.</em></h1>
+        <p class="intro-copy">
+          A transparent XAU/USD paper-trading desk built around disciplined signals,
+          defined risk, and the confidence to wait.
+        </p>
+      </div>
+
+      <div class="scan-card">
+        <div class="scan-orb" aria-hidden="true">
+          <svg viewBox="0 0 46 46" fill="none">
+            <circle cx="23" cy="23" r="18" stroke="currentColor" stroke-opacity=".2"></circle>
+            <circle cx="23" cy="23" r="12" stroke="currentColor" stroke-opacity=".5"></circle>
+            <path d="M23 13v10l6.5 4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"></path>
+          </svg>
+        </div>
+        <div>
+          <span>Next automatic scan</span>
+          <strong data-countdown>07:46</strong>
+          <small>Monitors every 15 minutes</small>
+        </div>
+        <button class="icon-button" type="button" data-run-analysis aria-label="Run analysis now">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M20 12a8 8 0 1 1-2.34-5.66" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path>
+            <path d="M20 4v5h-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </button>
+      </div>
     </div>
 
-    {error ? (
-      <div class="text-center py-12 bg-slate-800/50 backdrop-blur-sm rounded-xl border border-slate-700" data-testid="error-message">
-        <p class="text-red-400">{error}</p>
+    <div class="metrics-grid" id="portfolio">
+      <article class="metric-card balance-card">
+        <div class="metric-heading">
+          <span>Paper balance</span>
+          <span class="metric-icon gold">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M4 7.5 7.2 4h9.6L20 7.5v8L16.8 19H7.2L4 15.5v-8Z" stroke="currentColor" stroke-width="1.55"></path>
+              <path d="M8.1 10.2h7.8M8.1 13.8h5.1" stroke="currentColor" stroke-width="1.55" stroke-linecap="round"></path>
+            </svg>
+          </span>
+        </div>
+        <strong>$10,482<span>.60</span></strong>
+        <div class="metric-footer"><span class="positive">+$482.60</span><span>since start</span></div>
+      </article>
+
+      <article class="metric-card">
+        <div class="metric-heading">
+          <span>Total P&amp;L</span>
+          <span class="metric-icon green">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="m5 15 4-4 3 3 6-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+              <path d="M14 7h4v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </span>
+        </div>
+        <strong class="positive-text">+$482.60</strong>
+        <div class="metric-footer"><span class="positive">+4.83%</span><span>all time</span></div>
+      </article>
+
+      <article class="metric-card">
+        <div class="metric-heading">
+          <span>Win rate</span>
+          <span class="metric-icon blue">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="1.6"></circle>
+              <path d="M12 7v5l3.2 2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path>
+            </svg>
+          </span>
+        </div>
+        <strong>62.5<span>%</span></strong>
+        <div class="metric-footer"><span>10 wins</span><span>· 6 losses</span></div>
+      </article>
+
+      <article class="metric-card risk-metric">
+        <div class="metric-heading">
+          <span>Daily risk used</span>
+          <span class="metric-icon coral">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M12 4 4.5 18h15L12 4Z" stroke="currentColor" stroke-width="1.55" stroke-linejoin="round"></path>
+              <path d="M12 9v4.2M12 15.7v.1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path>
+            </svg>
+          </span>
+        </div>
+        <strong>1.4<span>%</span></strong>
+        <div class="risk-bar"><i></i></div>
+        <div class="metric-footer"><span>Limit: 3.0%</span><span class="safe">Safe</span></div>
+      </article>
+    </div>
+
+    <div class="workspace-grid">
+      <div class="left-column">
+        <article class="panel chart-panel">
+          <div class="panel-head">
+            <div>
+              <div class="panel-kicker">Live market</div>
+              <div class="instrument-title">
+                <h2>XAU/USD</h2>
+                <span>Gold / US Dollar</span>
+                <span class="open-market"><i></i> Open</span>
+              </div>
+            </div>
+            <div class="price-stack">
+              <strong>$2,175.42</strong>
+              <span class="positive">+0.31% <small>+$6.73</small></span>
+            </div>
+          </div>
+
+          <div class="chart-toolbar">
+            <div class="chart-legend"><i></i> Bid <span>2,175.42</span></div>
+            <div class="range-controls" role="group" aria-label="Chart range">
+              <button type="button" data-chart-range>1H</button>
+              <button type="button" class="selected" data-chart-range>4H</button>
+              <button type="button" data-chart-range>1D</button>
+              <button type="button" data-chart-range>1W</button>
+            </div>
+          </div>
+
+          <div class="chart-wrap">
+            <div class="chart-scale chart-scale-left">
+              <span>2,180</span><span>2,175</span><span>2,170</span><span>2,165</span>
+            </div>
+            <svg class="price-chart" viewBox="0 0 760 270" preserveAspectRatio="none" role="img" aria-label="XAU/USD chart rising through the current session">
+              <defs>
+                <linearGradient id="price-fill" x1="0" x2="0" y1="0" y2="1">
+                  <stop offset="0%" stop-color="#78e6af" stop-opacity=".27"></stop>
+                  <stop offset="100%" stop-color="#78e6af" stop-opacity="0"></stop>
+                </linearGradient>
+                <filter id="chart-glow" x="-20%" y="-30%" width="140%" height="160%">
+                  <feGaussianBlur stdDeviation="3" result="blur"></feGaussianBlur>
+                  <feMerge><feMergeNode in="blur"></feMergeNode><feMergeNode in="SourceGraphic"></feMergeNode></feMerge>
+                </filter>
+              </defs>
+              <g class="grid-lines">
+                <path d="M0 25H760M0 85H760M0 145H760M0 205H760M0 265H760"></path>
+                <path d="M95 0V270M250 0V270M405 0V270M560 0V270M715 0V270"></path>
+              </g>
+              <path class="area-fill" d="M0 214 C24 207 34 226 57 210 S88 180 111 193 S151 205 173 176 S212 130 241 153 S280 182 305 146 S346 100 372 119 S411 152 439 130 S468 81 499 95 S533 118 561 94 S594 73 620 90 S660 112 684 67 S718 49 760 35 V270 H0Z"></path>
+              <path class="price-line" filter="url(#chart-glow)" d="M0 214 C24 207 34 226 57 210 S88 180 111 193 S151 205 173 176 S212 130 241 153 S280 182 305 146 S346 100 372 119 S411 152 439 130 S468 81 499 95 S533 118 561 94 S594 73 620 90 S660 112 684 67 S718 49 760 35"></path>
+              <path class="ma-line" d="M0 199 C75 188 104 193 174 166 S260 145 321 137 S412 137 483 111 S575 98 638 86 S702 65 760 53"></path>
+              <g class="current-point">
+                <circle cx="760" cy="35" r="8"></circle>
+                <circle cx="760" cy="35" r="3.5"></circle>
+              </g>
+            </svg>
+            <div class="price-tag">$2,175.42</div>
+            <div class="chart-time"><span>06:00</span><span>08:00</span><span>10:00</span><span>12:00</span><span>14:00</span></div>
+          </div>
+
+          <div class="indicator-strip">
+            <div><span>RSI (14)</span><strong class="amber-text">58.4</strong></div>
+            <div><span>MACD</span><strong class="positive-text">+1.82</strong></div>
+            <div><span>Trend</span><strong>Upward</strong></div>
+            <div><span>Volatility</span><strong class="muted">Moderate</strong></div>
+          </div>
+        </article>
+
+        <article class="panel decision-panel" id="signals">
+          <div class="decision-top">
+            <div>
+              <div class="panel-kicker">AI decision engine</div>
+              <h2>Current market call</h2>
+            </div>
+            <span class="updated-time" data-analysis-status>Updated just now</span>
+          </div>
+
+          <div class="decision-content">
+            <div class="signal-call wait">
+              <span class="signal-dot"></span>
+              <div>
+                <small>Recommendation</small>
+                <strong>WAIT</strong>
+              </div>
+              <span class="confidence">64% confidence</span>
+            </div>
+            <p>
+              Momentum is positive, but price remains inside a narrow intraday range.
+              Wait for a confirmed close above <b>$2,178.20</b> or below <b>$2,169.80</b>.
+            </p>
+          </div>
+
+          <div class="decision-factors">
+            <div class="factor">
+              <div><span>Technical</span><strong>68 / 100</strong></div>
+              <div class="factor-bar"><i style="width: 68%"></i></div>
+              <small>Trend supports buyers, breakout unconfirmed.</small>
+            </div>
+            <div class="factor">
+              <div><span>News &amp; sentiment</span><strong>51 / 100</strong></div>
+              <div class="factor-bar amber"><i style="width: 51%"></i></div>
+              <small>Neutral USD outlook before Fed remarks.</small>
+            </div>
+            <div class="factor">
+              <div><span>Risk environment</span><strong>72 / 100</strong></div>
+              <div class="factor-bar blue"><i style="width: 72%"></i></div>
+              <small>Volatility is within the daily risk plan.</small>
+            </div>
+          </div>
+        </article>
       </div>
-    ) : (
-      <>
-        <DogList dogs={dogs} />
 
-        {totalPages > 1 && (
-          <nav class="flex justify-center items-center gap-2 mt-10" data-testid="pagination">
-            {page > 1 ? (
-              <a
-                href={`/?page=${page - 1}`}
-                class="px-4 py-2 rounded-lg bg-slate-800 border border-slate-700 text-slate-300 hover:border-blue-500/50 hover:text-blue-400 transition-colors"
-                data-testid="pagination-prev"
-              >
-                ← Previous
-              </a>
-            ) : (
-              <span class="px-4 py-2 rounded-lg bg-slate-800/50 border border-slate-700/50 text-slate-600 cursor-not-allowed">
-                ← Previous
-              </span>
-            )}
-
-            <span class="px-4 py-2 text-slate-300" data-testid="pagination-info">
-              Page {page} of {totalPages}
+      <aside class="right-column">
+        <article class="panel trade-panel">
+          <div class="panel-head compact">
+            <div>
+              <div class="panel-kicker">Paper trade plan</div>
+              <h2>Define before you decide</h2>
+            </div>
+            <span class="shield-icon" aria-label="Risk controls enabled">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M12 3.6 19 6v5.16c0 4.32-2.97 7.68-7 9.24-4.03-1.56-7-4.92-7-9.24V6l7-2.4Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"></path>
+                <path d="m8.8 12.1 2.1 2.1 4.4-4.7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
             </span>
+          </div>
 
-            {page < totalPages ? (
-              <a
-                href={`/?page=${page + 1}`}
-                class="px-4 py-2 rounded-lg bg-slate-800 border border-slate-700 text-slate-300 hover:border-blue-500/50 hover:text-blue-400 transition-colors"
-                data-testid="pagination-next"
-              >
-                Next →
-              </a>
-            ) : (
-              <span class="px-4 py-2 rounded-lg bg-slate-800/50 border border-slate-700/50 text-slate-600 cursor-not-allowed">
-                Next →
-              </span>
-            )}
-          </nav>
-        )}
-      </>
-    )}
-  </div>
+          <div class="duration-field">
+            <div class="field-label">
+              <span>Trade duration</span>
+              <strong data-duration-summary>10-minute balanced setup</strong>
+            </div>
+            <div class="duration-options" role="group" aria-label="Trade duration">
+              <button type="button" data-duration="5" aria-pressed="false"><strong>5</strong><span>min</span></button>
+              <button type="button" class="selected" data-duration="10" aria-pressed="true"><strong>10</strong><span>min</span></button>
+              <button type="button" data-duration="15" aria-pressed="false"><strong>15</strong><span>min</span></button>
+            </div>
+          </div>
+
+          <div class="plan-price">
+            <div><span>Potential entry</span><strong>$2,175.42</strong></div>
+            <span class="entry-note">Awaiting confirmation</span>
+          </div>
+
+          <div class="risk-values">
+            <div>
+              <span>Take profit</span>
+              <strong class="positive-text" data-take-profit>$2,181.30</strong>
+              <small data-potential-profit>+$29.40 potential</small>
+            </div>
+            <div>
+              <span>Stop loss</span>
+              <strong class="negative-text" data-stop-loss>$2,172.48</strong>
+              <small data-potential-loss>-$14.70 max loss</small>
+            </div>
+          </div>
+
+          <div class="position-row">
+            <span>Position size</span>
+            <div class="size-control"><button type="button" aria-label="Decrease position size">−</button><strong>0.10</strong><span>lots</span><button type="button" aria-label="Increase position size">+</button></div>
+          </div>
+
+          <div class="ratio-row"><span>Risk / reward</span><strong data-risk-ratio>1 : 2.0</strong></div>
+
+          <div class="trade-actions">
+            <button class="buy-button" type="button" data-preview-trade data-side="Buy">Preview buy</button>
+            <button class="sell-button" type="button" data-preview-trade data-side="Sell">Preview sell</button>
+          </div>
+          <p class="paper-note"><span>•</span> Simulation only. No broker account is connected.</p>
+        </article>
+
+        <article class="panel guardrail-panel">
+          <div class="guardrail-head">
+            <div>
+              <div class="panel-kicker">Risk guardrails</div>
+              <h2>Protected by rules</h2>
+            </div>
+            <span class="all-clear">All clear</span>
+          </div>
+          <div class="guardrail-list">
+            <div>
+              <span class="guardrail-check">✓</span>
+              <p><strong>Daily loss cap</strong><small>$140 used of $300 maximum</small></p>
+              <b>47%</b>
+            </div>
+            <div>
+              <span class="guardrail-check">✓</span>
+              <p><strong>Trade frequency</strong><small>2 of 5 trades placed today</small></p>
+              <b>2 / 5</b>
+            </div>
+            <div>
+              <span class="guardrail-check">✓</span>
+              <p><strong>Open exposure</strong><small>No open simulated positions</small></p>
+              <b>Clear</b>
+            </div>
+          </div>
+        </article>
+      </aside>
+    </div>
+
+    <div class="lower-grid">
+      <article class="panel journal-panel" id="journal">
+        <div class="panel-head compact">
+          <div>
+            <div class="panel-kicker">Decision journal</div>
+            <h2>Recent analysis</h2>
+          </div>
+          <button class="text-button" type="button">View all <span>→</span></button>
+        </div>
+        <div class="journal-table">
+          <div class="journal-row journal-headings"><span>Time</span><span>Signal</span><span>Confidence</span><span>Why it happened</span><span>Outcome</span></div>
+          <div class="journal-row"><span>14:00</span><span><b class="signal-badge wait">Wait</b></span><span>64%</span><span>Range still intact; no clean breakout.</span><span class="muted">Monitoring</span></div>
+          <div class="journal-row"><span>13:45</span><span><b class="signal-badge buy">Buy</b></span><span>78%</span><span>MACD crossed above zero with sentiment support.</span><span class="positive">+$31.20</span></div>
+          <div class="journal-row"><span>13:30</span><span><b class="signal-badge wait">Wait</b></span><span>59%</span><span>High-impact USD data approaching.</span><span class="muted">Skipped</span></div>
+        </div>
+      </article>
+
+      <article class="panel principle-panel">
+        <span class="principle-mark">“</span>
+        <p>A smart system analyzes every 15 minutes, but only acts when the opportunity is strong.</p>
+        <span>GoldPulse principle</span>
+      </article>
+    </div>
+
+    <div class="toast" data-trade-toast role="status" aria-live="polite"></div>
+  </section>
 </Layout>
+
+<script>
+  const durationPlans = {
+    '5': {
+      summary: '5-minute quick setup',
+      takeProfit: '$2,179.06',
+      stopLoss: '$2,173.18',
+      potentialProfit: '+$18.20 potential',
+      potentialLoss: '-$8.70 max loss',
+      ratio: '1 : 2.1',
+    },
+    '10': {
+      summary: '10-minute balanced setup',
+      takeProfit: '$2,181.30',
+      stopLoss: '$2,172.48',
+      potentialProfit: '+$29.40 potential',
+      potentialLoss: '-$14.70 max loss',
+      ratio: '1 : 2.0',
+    },
+    '15': {
+      summary: '15-minute extended setup',
+      takeProfit: '$2,183.94',
+      stopLoss: '$2,171.64',
+      potentialProfit: '+$42.60 potential',
+      potentialLoss: '-$21.30 max loss',
+      ratio: '1 : 2.0',
+    },
+  };
+
+  let selectedDuration = '10';
+  const durationButtons = document.querySelectorAll('[data-duration]');
+  const durationSummary = document.querySelector('[data-duration-summary]');
+  const takeProfit = document.querySelector('[data-take-profit]');
+  const stopLoss = document.querySelector('[data-stop-loss]');
+  const potentialProfit = document.querySelector('[data-potential-profit]');
+  const potentialLoss = document.querySelector('[data-potential-loss]');
+  const riskRatio = document.querySelector('[data-risk-ratio]');
+  const toast = document.querySelector('[data-trade-toast]');
+
+  function setDuration(duration) {
+    const plan = durationPlans[duration];
+    if (!plan) return;
+
+    selectedDuration = duration;
+    durationButtons.forEach((button) => {
+      const isSelected = button.getAttribute('data-duration') === duration;
+      button.classList.toggle('selected', isSelected);
+      button.setAttribute('aria-pressed', String(isSelected));
+    });
+
+    durationSummary.textContent = plan.summary;
+    takeProfit.textContent = plan.takeProfit;
+    stopLoss.textContent = plan.stopLoss;
+    potentialProfit.textContent = plan.potentialProfit;
+    potentialLoss.textContent = plan.potentialLoss;
+    riskRatio.textContent = plan.ratio;
+  }
+
+  durationButtons.forEach((button) => {
+    button.addEventListener('click', () => setDuration(button.getAttribute('data-duration') || '10'));
+  });
+
+  document.querySelectorAll('[data-chart-range]').forEach((button) => {
+    button.addEventListener('click', () => {
+      document.querySelectorAll('[data-chart-range]').forEach((rangeButton) => rangeButton.classList.remove('selected'));
+      button.classList.add('selected');
+    });
+  });
+
+  document.querySelectorAll('[data-preview-trade]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const side = button.getAttribute('data-side');
+      toast.textContent = `${side} paper ticket prepared for a ${selectedDuration}-minute setup. No order was sent.`;
+      toast.classList.add('visible');
+      window.setTimeout(() => toast.classList.remove('visible'), 3800);
+    });
+  });
+
+  const analysisButton = document.querySelector('[data-run-analysis]');
+  const analysisStatus = document.querySelector('[data-analysis-status]');
+  const countdown = document.querySelector('[data-countdown]');
+
+  analysisButton.addEventListener('click', () => {
+    analysisButton.setAttribute('disabled', 'true');
+    analysisStatus.textContent = 'Scanning technicals and headlines…';
+    countdown.textContent = '00:00';
+
+    window.setTimeout(() => {
+      analysisButton.removeAttribute('disabled');
+      analysisStatus.textContent = 'Updated just now';
+      countdown.textContent = '15:00';
+    }, 900);
+  });
+</script>
+
+<style>
+  .dashboard {
+    display: grid;
+    gap: 20px;
+  }
+
+  .intro-row,
+  .panel-head,
+  .decision-top,
+  .guardrail-head,
+  .metric-heading,
+  .field-label,
+  .plan-price,
+  .position-row,
+  .ratio-row,
+  .journal-row,
+  .instrument-title,
+  .chart-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .intro-row {
+    min-height: 142px;
+    gap: 28px;
+    padding: 12px 2px 8px;
+  }
+
+  .eyebrow,
+  .panel-kicker {
+    color: #9ba99f;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.105em;
+    text-transform: uppercase;
+  }
+
+  .eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    color: #d6c17d;
+  }
+
+  .eyebrow span {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #e8c46b;
+    box-shadow: 0 0 0 4px rgba(232, 196, 107, 0.11);
+  }
+
+  h1,
+  h2,
+  p {
+    margin: 0;
+  }
+
+  h1 {
+    max-width: 650px;
+    margin-top: 12px;
+    color: #f3f5ee;
+    font-size: clamp(2rem, 4vw, 3.45rem);
+    font-weight: 650;
+    letter-spacing: -0.065em;
+    line-height: 0.99;
+  }
+
+  h1 em {
+    color: #e9c870;
+    font-family: Georgia, "Times New Roman", serif;
+    font-weight: 500;
+  }
+
+  .intro-copy {
+    max-width: 585px;
+    margin-top: 15px;
+    color: #9ba9a1;
+    font-size: 0.94rem;
+    line-height: 1.6;
+  }
+
+  .scan-card {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    gap: 12px;
+    min-width: 254px;
+    padding: 13px 12px;
+    border: 1px solid rgba(151, 181, 159, 0.14);
+    border-radius: 14px;
+    background: rgba(18, 36, 30, 0.6);
+    box-shadow: 0 16px 35px rgba(0, 0, 0, 0.1);
+  }
+
+  .scan-orb {
+    display: grid;
+    width: 43px;
+    height: 43px;
+    place-items: center;
+    border: 1px solid rgba(105, 218, 166, 0.25);
+    border-radius: 13px;
+    color: #7de4b0;
+    background: rgba(33, 124, 85, 0.12);
+  }
+
+  .scan-orb svg {
+    width: 31px;
+    height: 31px;
+  }
+
+  .scan-card > div:nth-child(2) {
+    display: grid;
+    gap: 1px;
+  }
+
+  .scan-card span,
+  .scan-card small {
+    color: #87988e;
+    font-size: 0.69rem;
+  }
+
+  .scan-card strong {
+    color: #f0f4ec;
+    font-size: 1.17rem;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.02em;
+  }
+
+  .icon-button {
+    display: grid;
+    width: 32px;
+    height: 32px;
+    margin-left: 5px;
+    place-items: center;
+    border: 1px solid rgba(146, 180, 155, 0.18);
+    border-radius: 9px;
+    color: #adc0b3;
+    background: rgba(255, 255, 255, 0.035);
+    transition: color 160ms ease, border-color 160ms ease, transform 160ms ease;
+  }
+
+  .icon-button:hover {
+    border-color: rgba(233, 199, 106, 0.5);
+    color: #e8c66e;
+    transform: rotate(25deg);
+  }
+
+  .icon-button:disabled {
+    cursor: wait;
+    opacity: 0.45;
+  }
+
+  .icon-button svg {
+    width: 17px;
+    height: 17px;
+  }
+
+  .metrics-grid {
+    display: grid;
+    grid-template-columns: 1.16fr repeat(3, 1fr);
+    gap: 14px;
+  }
+
+  .metric-card,
+  .panel {
+    border: 1px solid rgba(153, 184, 162, 0.13);
+    background:
+      linear-gradient(145deg, rgba(23, 45, 37, 0.76), rgba(10, 25, 20, 0.67)),
+      rgba(13, 31, 25, 0.62);
+    box-shadow: inset 0 1px rgba(255, 255, 255, 0.025), 0 20px 45px rgba(0, 0, 0, 0.09);
+    backdrop-filter: blur(14px);
+  }
+
+  .metric-card {
+    min-height: 142px;
+    padding: 16px 17px 14px;
+    border-radius: 15px;
+  }
+
+  .balance-card {
+    background:
+      radial-gradient(circle at 96% 9%, rgba(225, 193, 103, 0.12), transparent 35%),
+      linear-gradient(145deg, rgba(39, 57, 40, 0.82), rgba(14, 28, 22, 0.72));
+  }
+
+  .metric-heading {
+    color: #95a49b;
+    font-size: 0.73rem;
+    font-weight: 590;
+  }
+
+  .metric-icon {
+    display: grid;
+    width: 25px;
+    height: 25px;
+    place-items: center;
+    border-radius: 8px;
+  }
+
+  .metric-icon svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  .metric-icon.gold {
+    color: #ebcd7c;
+    background: rgba(224, 183, 76, 0.11);
+  }
+
+  .metric-icon.green {
+    color: #6bdfaa;
+    background: rgba(55, 201, 137, 0.1);
+  }
+
+  .metric-icon.blue {
+    color: #82c8ef;
+    background: rgba(82, 172, 221, 0.11);
+  }
+
+  .metric-icon.coral {
+    color: #edaa91;
+    background: rgba(216, 114, 87, 0.1);
+  }
+
+  .metric-card > strong {
+    display: block;
+    margin-top: 14px;
+    color: #f1f4ee;
+    font-size: 1.47rem;
+    font-weight: 640;
+    letter-spacing: -0.045em;
+  }
+
+  .metric-card > strong span {
+    color: #b3c0b7;
+    font-size: 0.92rem;
+  }
+
+  .metric-footer {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin-top: 12px;
+    color: #77877e;
+    font-size: 0.7rem;
+  }
+
+  .positive,
+  .positive-text {
+    color: #75dea9 !important;
+  }
+
+  .negative-text {
+    color: #ef9981 !important;
+  }
+
+  .amber-text {
+    color: #e6c16a !important;
+  }
+
+  .safe {
+    margin-left: auto;
+    color: #7ddeab;
+  }
+
+  .risk-bar {
+    height: 4px;
+    margin-top: 16px;
+    overflow: hidden;
+    border-radius: 10px;
+    background: rgba(234, 144, 117, 0.13);
+  }
+
+  .risk-bar i {
+    display: block;
+    width: 47%;
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, #e29173, #e8bc69);
+  }
+
+  .workspace-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.9fr) minmax(315px, 0.82fr);
+    gap: 16px;
+  }
+
+  .left-column,
+  .right-column {
+    display: grid;
+    align-content: start;
+    gap: 16px;
+  }
+
+  .panel {
+    border-radius: 16px;
+  }
+
+  .chart-panel {
+    min-height: 453px;
+    padding: 19px 20px 14px;
+  }
+
+  .panel-head h2,
+  .decision-top h2,
+  .guardrail-head h2 {
+    margin-top: 4px;
+    color: #eff3ed;
+    font-size: 1rem;
+    font-weight: 630;
+    letter-spacing: -0.025em;
+  }
+
+  .panel-head.compact,
+  .guardrail-head {
+    align-items: flex-start;
+  }
+
+  .instrument-title {
+    justify-content: flex-start;
+    gap: 8px;
+    margin-top: 4px;
+  }
+
+  .instrument-title h2 {
+    margin: 0;
+    color: #f2f4ed;
+    font-size: 1.13rem;
+    font-weight: 660;
+    letter-spacing: -0.025em;
+  }
+
+  .instrument-title > span {
+    color: #75867d;
+    font-size: 0.73rem;
+  }
+
+  .open-market {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 7px;
+    border-radius: 99px;
+    color: #8bd9ac !important;
+    background: rgba(47, 173, 111, 0.09);
+    font-size: 0.63rem !important;
+    font-weight: 650;
+  }
+
+  .open-market i {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #67e3a9;
+  }
+
+  .price-stack {
+    display: grid;
+    justify-items: end;
+    gap: 4px;
+    text-align: right;
+  }
+
+  .price-stack strong {
+    color: #eff2ed;
+    font-size: 1.3rem;
+    font-weight: 650;
+    letter-spacing: -0.035em;
+  }
+
+  .price-stack span {
+    font-size: 0.73rem;
+    font-weight: 620;
+  }
+
+  .price-stack small {
+    color: #82948a;
+    font-size: 0.7rem;
+    font-weight: 500;
+  }
+
+  .chart-toolbar {
+    margin-top: 21px;
+  }
+
+  .chart-legend {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #7e8e85;
+    font-size: 0.7rem;
+  }
+
+  .chart-legend i {
+    display: inline-block;
+    width: 14px;
+    height: 2px;
+    border-radius: 3px;
+    background: #6ee4a7;
+  }
+
+  .chart-legend span {
+    color: #d8e1d9;
+    font-weight: 590;
+  }
+
+  .range-controls {
+    display: inline-flex;
+    gap: 2px;
+    padding: 3px;
+    border: 1px solid rgba(154, 184, 161, 0.12);
+    border-radius: 8px;
+    background: rgba(3, 14, 10, 0.28);
+  }
+
+  .range-controls button {
+    padding: 4px 8px;
+    border: 0;
+    border-radius: 5px;
+    color: #788a80;
+    background: transparent;
+    font-size: 0.66rem;
+    font-weight: 650;
+    transition: background 160ms ease, color 160ms ease;
+  }
+
+  .range-controls button:hover,
+  .range-controls button.selected {
+    color: #e0e7df;
+    background: rgba(135, 178, 149, 0.15);
+  }
+
+  .chart-wrap {
+    position: relative;
+    height: 261px;
+    margin-top: 14px;
+    padding: 7px 0 21px 32px;
+  }
+
+  .price-chart {
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+
+  .grid-lines path {
+    stroke: rgba(151, 178, 158, 0.115);
+    stroke-width: 1;
+    vector-effect: non-scaling-stroke;
+  }
+
+  .area-fill {
+    fill: url(#price-fill);
+  }
+
+  .price-line {
+    fill: none;
+    stroke: #6de1a5;
+    stroke-width: 2.25;
+    vector-effect: non-scaling-stroke;
+  }
+
+  .ma-line {
+    fill: none;
+    stroke: #d9b95e;
+    stroke-width: 1.25;
+    stroke-dasharray: 4 4;
+    opacity: 0.75;
+    vector-effect: non-scaling-stroke;
+  }
+
+  .current-point circle:first-child {
+    fill: rgba(111, 229, 166, 0.18);
+  }
+
+  .current-point circle:last-child {
+    fill: #a3f2c7;
+    stroke: #1c8960;
+    stroke-width: 1.5;
+  }
+
+  .chart-scale {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: #56685e;
+    font-size: 0.63rem;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .chart-scale-left {
+    top: 6px;
+    bottom: 25px;
+    left: 0;
+  }
+
+  .price-tag {
+    position: absolute;
+    top: 28px;
+    right: -1px;
+    padding: 3px 6px;
+    border: 1px solid rgba(106, 226, 164, 0.35);
+    border-radius: 5px;
+    color: #bff0d1;
+    background: #184f3a;
+    font-size: 0.62rem;
+    font-weight: 650;
+  }
+
+  .chart-time {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 32px;
+    display: flex;
+    justify-content: space-between;
+    color: #53645b;
+    font-size: 0.62rem;
+  }
+
+  .indicator-strip {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    margin-top: 8px;
+    border-top: 1px solid rgba(153, 185, 160, 0.1);
+  }
+
+  .indicator-strip > div {
+    display: grid;
+    gap: 3px;
+    padding: 12px 12px 0;
+    border-right: 1px solid rgba(153, 185, 160, 0.08);
+  }
+
+  .indicator-strip > div:first-child {
+    padding-left: 0;
+  }
+
+  .indicator-strip > div:last-child {
+    border-right: 0;
+  }
+
+  .indicator-strip span {
+    color: #74867d;
+    font-size: 0.63rem;
+  }
+
+  .indicator-strip strong {
+    color: #dce4dd;
+    font-size: 0.73rem;
+    font-weight: 620;
+  }
+
+  .muted {
+    color: #84958c !important;
+  }
+
+  .decision-panel {
+    overflow: hidden;
+  }
+
+  .decision-top {
+    padding: 18px 20px 14px;
+  }
+
+  .updated-time {
+    color: #73847a;
+    font-size: 0.67rem;
+  }
+
+  .decision-content {
+    display: grid;
+    grid-template-columns: 181px 1fr;
+    gap: 22px;
+    align-items: center;
+    padding: 17px 20px;
+    border-top: 1px solid rgba(153, 185, 160, 0.1);
+    border-bottom: 1px solid rgba(153, 185, 160, 0.1);
+    background: rgba(4, 15, 11, 0.17);
+  }
+
+  .signal-call {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+  }
+
+  .signal-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+  }
+
+  .signal-call.wait .signal-dot {
+    background: #e5bf60;
+    box-shadow: 0 0 0 5px rgba(229, 191, 96, 0.1);
+  }
+
+  .signal-call div {
+    display: grid;
+    gap: 2px;
+  }
+
+  .signal-call small {
+    color: #84958b;
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .signal-call strong {
+    color: #ebc86f;
+    font-size: 1.26rem;
+    font-weight: 740;
+    letter-spacing: 0.08em;
+  }
+
+  .confidence {
+    display: none;
+    color: #938257;
+    font-size: 0.65rem;
+  }
+
+  .decision-content p {
+    color: #9aa9a0;
+    font-size: 0.79rem;
+    line-height: 1.62;
+  }
+
+  .decision-content b {
+    color: #e5eee5;
+    font-weight: 620;
+  }
+
+  .decision-factors {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    padding: 16px 20px 18px;
+  }
+
+  .factor > div:first-child {
+    display: flex;
+    justify-content: space-between;
+    color: #85958c;
+    font-size: 0.65rem;
+  }
+
+  .factor > div:first-child strong {
+    color: #b6c6ba;
+    font-weight: 610;
+  }
+
+  .factor-bar {
+    height: 4px;
+    margin: 8px 0 6px;
+    overflow: hidden;
+    border-radius: 3px;
+    background: rgba(97, 215, 154, 0.11);
+  }
+
+  .factor-bar i {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    background: #62d89c;
+  }
+
+  .factor-bar.amber {
+    background: rgba(223, 181, 86, 0.11);
+  }
+
+  .factor-bar.amber i {
+    background: #dbba67;
+  }
+
+  .factor-bar.blue {
+    background: rgba(104, 181, 219, 0.1);
+  }
+
+  .factor-bar.blue i {
+    background: #77bddc;
+  }
+
+  .factor small {
+    color: #65766c;
+    font-size: 0.64rem;
+    line-height: 1.4;
+  }
+
+  .trade-panel {
+    padding: 18px;
+  }
+
+  .shield-icon {
+    display: grid;
+    width: 31px;
+    height: 31px;
+    place-items: center;
+    border: 1px solid rgba(106, 221, 161, 0.2);
+    border-radius: 9px;
+    color: #74d9a4;
+    background: rgba(52, 155, 106, 0.1);
+  }
+
+  .shield-icon svg {
+    width: 17px;
+    height: 17px;
+  }
+
+  .duration-field {
+    margin-top: 19px;
+  }
+
+  .field-label {
+    color: #8b9b91;
+    font-size: 0.69rem;
+  }
+
+  .field-label strong {
+    color: #c8d3c8;
+    font-size: 0.66rem;
+    font-weight: 590;
+  }
+
+  .duration-options {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 7px;
+    margin-top: 9px;
+  }
+
+  .duration-options button {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 2px;
+    padding: 10px 4px;
+    border: 1px solid rgba(150, 182, 160, 0.15);
+    border-radius: 9px;
+    color: #a0afa6;
+    background: rgba(4, 16, 12, 0.3);
+    transition: border-color 160ms ease, background 160ms ease, color 160ms ease, transform 160ms ease;
+  }
+
+  .duration-options button:hover {
+    border-color: rgba(229, 194, 100, 0.45);
+    transform: translateY(-1px);
+  }
+
+  .duration-options button.selected {
+    border-color: rgba(228, 190, 92, 0.65);
+    color: #f0d27e;
+    background: linear-gradient(150deg, rgba(227, 187, 88, 0.16), rgba(97, 78, 32, 0.12));
+  }
+
+  .duration-options strong {
+    font-size: 0.91rem;
+    font-weight: 720;
+  }
+
+  .duration-options span {
+    font-size: 0.62rem;
+  }
+
+  .plan-price {
+    margin-top: 18px;
+    padding: 12px 0;
+    border-top: 1px solid rgba(151, 182, 159, 0.11);
+    border-bottom: 1px solid rgba(151, 182, 159, 0.11);
+  }
+
+  .plan-price > div {
+    display: grid;
+    gap: 3px;
+  }
+
+  .plan-price span,
+  .risk-values span,
+  .position-row > span,
+  .ratio-row span {
+    color: #7b8c82;
+    font-size: 0.67rem;
+  }
+
+  .plan-price strong {
+    color: #e7eee6;
+    font-size: 0.92rem;
+    font-weight: 620;
+  }
+
+  .entry-note {
+    padding: 4px 6px;
+    border-radius: 5px;
+    color: #d3ba6a !important;
+    background: rgba(221, 185, 90, 0.08);
+    font-size: 0.59rem !important;
+  }
+
+  .risk-values {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    padding: 15px 0;
+  }
+
+  .risk-values > div {
+    display: grid;
+    gap: 4px;
+  }
+
+  .risk-values > div + div {
+    padding-left: 13px;
+    border-left: 1px solid rgba(151, 182, 159, 0.11);
+  }
+
+  .risk-values strong {
+    font-size: 0.83rem;
+    font-weight: 650;
+  }
+
+  .risk-values small {
+    color: #798a80;
+    font-size: 0.59rem;
+  }
+
+  .position-row,
+  .ratio-row {
+    padding-top: 12px;
+    border-top: 1px solid rgba(151, 182, 159, 0.1);
+  }
+
+  .size-control {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    color: #dee6de;
+  }
+
+  .size-control button {
+    display: grid;
+    width: 19px;
+    height: 19px;
+    place-items: center;
+    border: 1px solid rgba(149, 181, 159, 0.18);
+    border-radius: 5px;
+    color: #9cad9f;
+    background: rgba(255, 255, 255, 0.025);
+    line-height: 1;
+  }
+
+  .size-control strong {
+    font-size: 0.75rem;
+  }
+
+  .size-control span {
+    color: #6f8176;
+    font-size: 0.62rem;
+  }
+
+  .ratio-row {
+    padding-bottom: 15px;
+  }
+
+  .ratio-row strong {
+    color: #cbd6cc;
+    font-size: 0.74rem;
+    font-weight: 620;
+  }
+
+  .trade-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .trade-actions button {
+    padding: 10px 6px;
+    border-radius: 8px;
+    font-size: 0.7rem;
+    font-weight: 710;
+    transition: transform 160ms ease, filter 160ms ease;
+  }
+
+  .trade-actions button:hover {
+    filter: brightness(1.11);
+    transform: translateY(-1px);
+  }
+
+  .buy-button {
+    border: 1px solid rgba(85, 218, 156, 0.45);
+    color: #c8f4d9;
+    background: linear-gradient(145deg, #277d55, #17563c);
+  }
+
+  .sell-button {
+    border: 1px solid rgba(227, 137, 105, 0.4);
+    color: #f2c0af;
+    background: linear-gradient(145deg, #713f35, #452720);
+  }
+
+  .paper-note {
+    display: flex;
+    gap: 5px;
+    margin-top: 11px;
+    color: #63756a;
+    font-size: 0.61rem;
+    line-height: 1.4;
+  }
+
+  .paper-note span {
+    color: #d5bc65;
+  }
+
+  .guardrail-panel {
+    padding: 17px 18px 8px;
+  }
+
+  .all-clear {
+    padding: 4px 7px;
+    border-radius: 5px;
+    color: #88d8a9;
+    background: rgba(47, 178, 115, 0.09);
+    font-size: 0.62rem;
+    font-weight: 640;
+  }
+
+  .guardrail-list {
+    margin-top: 13px;
+  }
+
+  .guardrail-list > div {
+    display: grid;
+    grid-template-columns: 20px minmax(0, 1fr) auto;
+    gap: 7px;
+    align-items: center;
+    padding: 10px 0;
+    border-top: 1px solid rgba(152, 183, 160, 0.09);
+  }
+
+  .guardrail-check {
+    display: grid;
+    width: 18px;
+    height: 18px;
+    place-items: center;
+    border-radius: 6px;
+    color: #81dfaa;
+    background: rgba(60, 176, 118, 0.1);
+    font-size: 0.7rem;
+    font-weight: 800;
+  }
+
+  .guardrail-list p {
+    display: grid;
+    gap: 2px;
+  }
+
+  .guardrail-list p strong {
+    color: #b7c5b9;
+    font-size: 0.67rem;
+    font-weight: 610;
+  }
+
+  .guardrail-list p small {
+    color: #718177;
+    font-size: 0.59rem;
+  }
+
+  .guardrail-list b {
+    color: #d6dfd7;
+    font-size: 0.65rem;
+    font-weight: 610;
+  }
+
+  .lower-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.7fr) minmax(250px, 0.6fr);
+    gap: 16px;
+  }
+
+  .journal-panel {
+    padding: 18px 20px 7px;
+  }
+
+  .text-button {
+    border: 0;
+    color: #b8c5ba;
+    background: transparent;
+    font-size: 0.69rem;
+    font-weight: 610;
+  }
+
+  .text-button span {
+    margin-left: 3px;
+    color: #e6c26b;
+  }
+
+  .journal-table {
+    margin-top: 12px;
+  }
+
+  .journal-row {
+    display: grid;
+    grid-template-columns: 0.45fr 0.65fr 0.65fr 2.4fr 0.7fr;
+    gap: 12px;
+    min-width: 585px;
+    padding: 11px 0;
+    border-top: 1px solid rgba(153, 184, 162, 0.09);
+    color: #a0aea4;
+    font-size: 0.68rem;
+  }
+
+  .journal-row:not(.journal-headings) span:nth-child(4) {
+    color: #7e8e84;
+  }
+
+  .journal-headings {
+    color: #65776c;
+    font-size: 0.59rem;
+    font-weight: 680;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+  }
+
+  .signal-badge {
+    display: inline-block;
+    padding: 3px 6px;
+    border-radius: 4px;
+    font-size: 0.59rem;
+    font-weight: 680;
+  }
+
+  .signal-badge.wait {
+    color: #ead07c;
+    background: rgba(223, 183, 82, 0.12);
+  }
+
+  .signal-badge.buy {
+    color: #8ce0b0;
+    background: rgba(46, 188, 121, 0.12);
+  }
+
+  .principle-panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 178px;
+    padding: 23px 26px;
+    background:
+      radial-gradient(circle at 93% 8%, rgba(229, 193, 96, 0.12), transparent 36%),
+      linear-gradient(145deg, rgba(43, 58, 39, 0.78), rgba(16, 31, 23, 0.68));
+  }
+
+  .principle-mark {
+    height: 29px;
+    color: #d9b95d;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 2.8rem;
+    line-height: 1;
+  }
+
+  .principle-panel p {
+    color: #d2dbd2;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.01rem;
+    font-style: italic;
+    line-height: 1.45;
+  }
+
+  .principle-panel > span:last-child {
+    margin-top: 14px;
+    color: #9aab9e;
+    font-size: 0.65rem;
+    font-style: normal;
+    font-weight: 650;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+  }
+
+  .toast {
+    position: fixed;
+    z-index: 4;
+    right: 20px;
+    bottom: 20px;
+    max-width: min(360px, calc(100vw - 40px));
+    padding: 11px 14px;
+    border: 1px solid rgba(111, 220, 159, 0.32);
+    border-radius: 9px;
+    color: #c8eed7;
+    background: rgba(18, 67, 46, 0.96);
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.25);
+    font-size: 0.76rem;
+    line-height: 1.4;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(12px);
+    transition: opacity 180ms ease, transform 180ms ease;
+  }
+
+  .toast.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (max-width: 1080px) {
+    .metrics-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .workspace-grid {
+      grid-template-columns: minmax(0, 1.5fr) minmax(295px, 0.9fr);
+    }
+
+    .lower-grid {
+      grid-template-columns: minmax(0, 1.4fr) minmax(230px, 0.7fr);
+    }
+  }
+
+  @media (max-width: 840px) {
+    .workspace-grid,
+    .lower-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .right-column {
+      grid-template-columns: 1.08fr 0.92fr;
+    }
+
+    .intro-row {
+      align-items: flex-end;
+    }
+
+    .principle-panel {
+      min-height: 150px;
+    }
+  }
+
+  @media (max-width: 620px) {
+    .intro-row {
+      display: grid;
+      gap: 18px;
+      min-height: 0;
+    }
+
+    h1 {
+      font-size: 2.45rem;
+    }
+
+    .scan-card {
+      width: 100%;
+      min-width: 0;
+    }
+
+    .scan-card .icon-button {
+      margin-left: auto;
+    }
+
+    .metrics-grid,
+    .right-column {
+      grid-template-columns: 1fr;
+    }
+
+    .metric-card {
+      min-height: 125px;
+    }
+
+    .chart-panel,
+    .trade-panel,
+    .guardrail-panel,
+    .journal-panel {
+      padding-right: 14px;
+      padding-left: 14px;
+    }
+
+    .chart-panel {
+      min-height: 420px;
+    }
+
+    .instrument-title > span:not(.open-market) {
+      display: none;
+    }
+
+    .decision-content {
+      grid-template-columns: 1fr;
+      gap: 13px;
+    }
+
+    .confidence {
+      display: inline;
+      margin-left: auto;
+    }
+
+    .decision-factors {
+      grid-template-columns: 1fr;
+      gap: 13px;
+    }
+
+    .indicator-strip {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px 0;
+    }
+
+    .indicator-strip > div:nth-child(3) {
+      padding-left: 0;
+    }
+
+    .indicator-strip > div:nth-child(2) {
+      border-right: 0;
+    }
+
+    .journal-panel {
+      overflow: hidden;
+    }
+
+    .journal-table {
+      overflow-x: auto;
+      padding-bottom: 3px;
+    }
+  }
+</style>

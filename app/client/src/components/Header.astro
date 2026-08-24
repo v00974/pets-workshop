@@ -1,11 +1,197 @@
-<header class="bg-blue-700 text-white p-4 shadow-md">
-  <div class="container mx-auto flex justify-between items-center px-4">
-    <h1 class="text-xl font-bold"><a href="/" class="hover:underline">Tailspin Shelter</a></h1>
-    <nav>
-      <ul class="flex gap-4">
-        <li><a href="/" class="hover:underline">Home</a></li>
-        <li><a href="/about" class="hover:underline">About</a></li>
-      </ul>
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="/" aria-label="GoldPulse AI dashboard">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 30 30" fill="none">
+          <path d="M8 20.5 12.1 15l3.3 3.1L22 9.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path>
+          <path d="M20 9.5h2v2" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path>
+          <circle cx="15" cy="15" r="13" stroke="currentColor" stroke-opacity=".36"></circle>
+        </svg>
+      </span>
+      <span>
+        <strong>GoldPulse</strong>
+        <span>AI</span>
+      </span>
+    </a>
+
+    <nav class="primary-nav" aria-label="Primary navigation">
+      <a class="active" href="#overview">Overview</a>
+      <a href="#signals">Signals</a>
+      <a href="#portfolio">Portfolio</a>
+      <a href="#journal">Journal</a>
     </nav>
+
+    <div class="header-status">
+      <span class="paper-pill"><i></i> Paper mode</span>
+      <button class="profile-button" type="button" aria-label="Open profile">
+        <span>JD</span>
+        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="m4 6 4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+      </button>
+    </div>
   </div>
 </header>
+
+<style>
+  .site-header {
+    position: relative;
+    z-index: 2;
+    width: min(1440px, calc(100% - 40px));
+    margin: 0 auto;
+    padding: 18px 0 15px;
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 28px;
+  }
+
+  .brand {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    gap: 10px;
+    letter-spacing: -0.04em;
+  }
+
+  .brand-mark {
+    display: grid;
+    width: 34px;
+    height: 34px;
+    place-items: center;
+    border: 1px solid rgba(232, 202, 109, 0.46);
+    border-radius: 11px;
+    color: #f0cf78;
+    background: linear-gradient(145deg, rgba(225, 188, 88, 0.16), rgba(42, 85, 69, 0.15));
+    box-shadow: inset 0 1px rgba(255, 244, 204, 0.14), 0 8px 22px rgba(0, 0, 0, 0.17);
+  }
+
+  .brand-mark svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .brand strong {
+    color: #f3f5ef;
+    font-size: 1.1rem;
+    font-weight: 720;
+  }
+
+  .brand > span:last-child span {
+    margin-left: 3px;
+    color: #e8c66f;
+    font-size: 1.1rem;
+    font-weight: 650;
+  }
+
+  .primary-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    margin-left: auto;
+  }
+
+  .primary-nav a {
+    padding: 8px 12px;
+    border-radius: 8px;
+    color: #87978d;
+    font-size: 0.84rem;
+    font-weight: 570;
+    transition: color 160ms ease, background 160ms ease;
+  }
+
+  .primary-nav a:hover,
+  .primary-nav a.active {
+    color: #e7eee7;
+    background: rgba(156, 198, 170, 0.08);
+  }
+
+  .header-status {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .paper-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 7px 10px;
+    border: 1px solid rgba(76, 190, 141, 0.25);
+    border-radius: 99px;
+    color: #93d9b2;
+    background: rgba(28, 115, 78, 0.1);
+    font-size: 0.72rem;
+    font-weight: 670;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .paper-pill i {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #60e7ad;
+    box-shadow: 0 0 0 4px rgba(96, 231, 173, 0.11);
+  }
+
+  .profile-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0;
+    border: 0;
+    color: #8f9e96;
+    background: transparent;
+  }
+
+  .profile-button span {
+    display: grid;
+    width: 31px;
+    height: 31px;
+    place-items: center;
+    border: 1px solid rgba(232, 202, 109, 0.34);
+    border-radius: 50%;
+    color: #f3d785;
+    background: #28332d;
+    font-size: 0.69rem;
+    font-weight: 750;
+  }
+
+  .profile-button svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  @media (max-width: 760px) {
+    .site-header {
+      width: min(100% - 24px, 1440px);
+      padding: 14px 0 10px;
+    }
+
+    .primary-nav {
+      display: none;
+    }
+
+    .header-inner {
+      gap: 12px;
+    }
+
+    .paper-pill {
+      padding: 6px 8px;
+      font-size: 0.66rem;
+    }
+  }
+
+  @media (max-width: 420px) {
+    .profile-button svg,
+    .paper-pill {
+      display: none;
+    }
+  }
+</style>
